@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+
+   <div id="divInternalDemo"></div>
+
+   <div id="divExternalDemo"></div>
+
+   <div id="divForDemo"></div>
+    
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://www.jsviews.com/download/jsviews.min.js"></script>
+<script src="person.templates.js"></script>
+
+<!-- Internal Templates -->
+<script id="personInternalDemo" type="text/x-jsrender">
+
+    <div>
+        <label>full Name : {{:fullName}}</label>
+    </div>
+
+</script>
+
+<script type="text/javascript" lang="javascript">
+
+    // Data
+    let data={
+
+        fullName:"Kishor Naik"
+    };
+
+    // Internal Templates
+    let template=$.templates("#personInternalDemo");
+
+    template.link("#divInternalDemo",data);
+
+    ////////////////////////////////////////////
+
+    // External Template
+
+    $.getScript("./person.templates.js",function(){
+        var demoHtml = $.render.personExternalDemo(data);
+
+        $("#divExternalDemo").html(demoHtml);        
+
+    });
+
+    //////////////////////////////////////////////
+    // for Demo
+    let arrData=[
+            {
+                fullName:"Kishor Naik"
+            },
+            {
+                fullName:"Eshaan Naik"
+            }
+    ];
+
+    let peronData={
+        people:arrData
+    }
+
+    $.getScript("./person.templates.js",function(){
+        var demoHtml = $.render.personForDemo(peronData);
+
+        $("#divForDemo").html(demoHtml);        
+
+    });
+
+
+</script>
+
+    
+
+
+</html>
